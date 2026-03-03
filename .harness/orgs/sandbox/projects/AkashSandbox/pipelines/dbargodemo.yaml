@@ -31,7 +31,7 @@ pipeline:
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: Akash_Docker_Hub
-                    repo: akashxg/eks-config-ui
+                    repo: eks-config-ui
                     tags:
                       - staging-001
                       - latest
