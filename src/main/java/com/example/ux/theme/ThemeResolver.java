@@ -2,7 +2,7 @@ package com.example.ux.theme;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("uiThemeResolver")
 public class ThemeResolver {
 
     public ThemeDescriptor resolve(String imageTag) {
