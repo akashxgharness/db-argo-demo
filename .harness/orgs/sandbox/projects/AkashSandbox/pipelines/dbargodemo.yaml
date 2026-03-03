@@ -36,7 +36,7 @@ pipeline:
                          docker push YOUR_REGISTRY/eks-config-ui:staging-001
               - step:
                   type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
+                  name: Build and Push
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: Akash_Docker_Hub
