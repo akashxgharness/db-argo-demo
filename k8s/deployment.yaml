@@ -27,7 +27,7 @@ spec:
       containers:
         - name: eks-config-ui
           # TODO: update to your real image registry and tag
-          image: YOUR_REGISTRY/eks-config-ui:dev-123
+          image: akashxg/eks-config-ui:dev-123
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
