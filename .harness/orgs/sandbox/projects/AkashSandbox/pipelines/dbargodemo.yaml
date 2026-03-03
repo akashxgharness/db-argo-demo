@@ -26,24 +26,18 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Run
-                  name: Run_1
-                  identifier: Run_1
-                  spec:
-                    shell: Sh
-                    command: |-
-                      docker build -t YOUR_REGISTRY/eks-config-ui:staging-001 .
-                         docker push YOUR_REGISTRY/eks-config-ui:staging-001
-              - step:
                   type: BuildAndPushDockerRegistry
                   name: Build and Push
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: Akash_Docker_Hub
-                    repo: akashregistry
+                    repo: eks-config-ui
                     tags:
-                      - eks-config-ui:staging-001
+                      - staging-001
+                      - latest
                     caching: true
+                    dockerfile: ./Dockerfile
+                    context: .
   properties:
     ci:
       codebase:
