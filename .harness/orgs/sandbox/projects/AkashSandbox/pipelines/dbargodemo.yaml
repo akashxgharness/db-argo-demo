@@ -42,7 +42,7 @@ pipeline:
                     connectorRef: Akash_Docker_Hub
                     repo: akashregistry
                     tags:
-                      - latest
+                      - eks-config-ui:staging-001
                     caching: true
   properties:
     ci:
