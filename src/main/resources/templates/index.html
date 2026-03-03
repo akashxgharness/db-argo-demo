@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${theme.name} + ' - EKS Config UI'">EKS Config UI</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body th:style="'--primary-color: ' + ${theme.primaryColor} + '; --secondary-color: ' + ${theme.secondaryColor}">
+<div class="page">
+    <header class="header">
+        <div class="logo-title">
+            <img th:src="@{${theme.logoPath}}" alt="Logo" class="logo"/>
+            <div>
+                <h1>EKS Config-Driven UI</h1>
+                <p th:text="${theme.bannerText}">Environment</p>
+            </div>
+        </div>
+        <div class="tag-chip">
+            <span>Image tag:</span>
+            <strong th:text="${imageTag != null && !#strings.isEmpty(imageTag) ? imageTag : 'N/A'}">N/A</strong>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="card">
+            <h2>Current Environment</h2>
+            <p>
+                This UI is themed dynamically based on the container image tag
+                provided to the application via your EKS configuration.
+            </p>
+            <ul>
+                <li><strong>Development</strong> when the tag contains <code>dev</code>.</li>
+                <li><strong>Staging</strong> when the tag contains <code>staging</code>.</li>
+                <li><strong>Production</strong> when the tag contains <code>prod</code> or matches a semantic version like <code>v1.2.3</code>.</li>
+                <li><strong>Default</strong> for any other tag.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>&copy; <span th:text="${#dates.year(#dates.createNow())}">2026</span> EKS Config-Driven UI Demo</span>
+    </footer>
+</div>
+</body>
+</html>
+

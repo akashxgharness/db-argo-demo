@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: eks-config-ui
+spec:
+  replicas: 3
+  strategy:
+    canary:
+      maxUnavailable: 0
+      maxSurge: 1
+      steps:
+        - setWeight: 20
+        - pause:
+            duration: 60
+        - setWeight: 50
+        - pause:
+            duration: 60
+        - setWeight: 100
+  selector:
+    matchLabels:
+      app: eks-config-ui
+  template:
+    metadata:
+      labels:
+        app: eks-config-ui
+    spec:
+      containers:
+        - name: eks-config-ui
+          # TODO: update to your real image registry and tag
+          image: YOUR_REGISTRY/eks-config-ui:dev-123
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            # Tell Spring Boot to read the image tag from the mounted config.json file
+            - name: IMAGE_TAG_SOURCE
+              value: "FILE"
+            - name: IMAGE_TAG_FILE_PATH
+              value: "/config/config.json"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+      volumes:
+        - name: config-volume
+          configMap:
+            name: eks-config-ui-config
+

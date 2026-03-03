@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: eks-config-ui
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: eks-config-ui
+            namespace: eks-config-ui
+            path: k8s
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: default
+      source:
+        # TODO: update to your Git repo URL and optional targetRevision
+        repoURL: https://github.com/YOUR_ORG/YOUR_REPO.git
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+

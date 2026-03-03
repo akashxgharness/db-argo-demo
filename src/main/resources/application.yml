@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  thymeleaf:
+    cache: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+image-tag:
+  source: ENV
+  env-var: IMAGE_TAG
+  file-path: /config/config.json
+
