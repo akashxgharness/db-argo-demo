@@ -16,8 +16,6 @@ spec:
     spec:
       project: default
       source:
-        # TODO: update to your Git repo URL and optional targetRevision
-        # updated urls
         repoURL: https://github.com/akashxgharness/db-argo-demo.git
         targetRevision: main
         path: '{{path}}'
