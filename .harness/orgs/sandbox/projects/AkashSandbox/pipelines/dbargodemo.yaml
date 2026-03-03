@@ -31,9 +31,9 @@ pipeline:
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: Akash_Docker_Hub
-                    repo: eks-config-ui
+                    repo: akashxg/eks-config-ui
                     tags:
-                      - staging-001
+                      - dev-123
                     caching: true
                     dockerfile: ./Dockerfile
                     context: .
