@@ -34,7 +34,6 @@ pipeline:
                     repo: eks-config-ui
                     tags:
                       - staging-001
-                      - latest
                     caching: true
                     dockerfile: ./Dockerfile
                     context: .
