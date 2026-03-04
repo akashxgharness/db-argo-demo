@@ -46,7 +46,7 @@ pipeline:
           deploymentType: Kubernetes
           gitOpsEnabled: true
           service:
-            serviceRef: gitopsrolloutscanary
+            serviceRef: springBootApp
             serviceInputs:
               serviceDefinition:
                 type: Kubernetes
